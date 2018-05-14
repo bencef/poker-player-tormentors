@@ -1,94 +1,96 @@
 import json
 
-game_state = json.loads('''{
-  "tournament_id":"550d1d68cd7bd10003000003",
+def make_game_state(our_cards):
 
-  "game_id":"550da1cb2d909006e90004b1",
+    return {
+        u'tournament_id':u'550d1d68cd7bd10003000003',
 
-
-
-  "round":0,
-
-  "bet_index":0,
-
-  "small_blind": 10,
+  u'game_id':u'550da1cb2d909006e90004b1',
 
 
-  "current_buy_in": 320,
 
-  "pot": 400,
+  u'round':0,
 
-  "minimum_raise": 240,
+  u'bet_index':0,
 
-
-  "dealer": 1,
+  u'small_blind': 10,
 
 
-  "orbits": 7,
+  u'current_buy_in': 320,
+
+  u'pot': 400,
+
+  u'minimum_raise': 240,
 
 
-  "in_action": 1,
+  u'dealer': 1,
 
-  "players": [
+
+  u'orbits': 7,
+
+
+  u'in_action': 1,
+
+  u'players': [
       {
 
-          "id": 0,
+          u'id': 0,
 
-          "name": "Albert",
+          u'name': u'Albert',
 
-          "status": "active",
-
-
+          u'status': u'active',
 
 
 
-          "version": "Default random player",
-
-          "stack": 1010,
 
 
-          "bet": 320
+          u'version': u'Default random player',
+
+          u'stack': 1010,
+
+
+          u'bet': 320
       },
       {
-          "id": 1,
-          "name": "TorMentors",
-          "status": "active",
-          "version": "Default random player",
-          "stack": 1590,
-          "bet": 80,
-          "hole_cards": [
+          u'id': 1,
+          u'name': u'TorMentors',
+          u'status': u'active',
+          u'version': u'Default random player',
+          u'stack': 1590,
+          u'bet': 80,
+          u'hole_cards': [
 
               {
-                  "rank": "6",
-                  "suit": "hearts"
+                  u'rank': our_cards[0]['rank'],
+                  u'suit': our_cards[0]['suit']
               },
               {
-                  "rank": "K",
-                  "suit": "spades"
+                  u'rank': our_cards[1]['rank'],
+                  u'suit': our_cards[1]['suit']
               }
           ]
       },
       {
-          "id": 2,
-          "name": "Chuck",
-          "status": "out",
-          "version": "Default random player",
-          "stack": 0,
-          "bet": 0
+          u'id': 2,
+          u'name': u'Chuck',
+          u'status': u'out',
+          u'version': u'Default random player',
+          u'stack': 0,
+          u'bet': 0
       }
   ],
-  "community_cards": [
-      {
-          "rank": "4",
-          "suit": "spades"
-      },
-      {
-          "rank": "A",
-          "suit": "hearts"
-      },
-      {
-          "rank": "6",
-          "suit": "clubs"
-      }
-  ]
-}''')
+        u'community_cards': [
+            {
+                u'rank': u'4',
+                u'suit': u'spades'
+            },
+            {
+                u'rank': u'A',
+                u'suit': u'hearts'
+            },
+            {
+                u'rank': u'6',
+                u'suit': u'clubs'
+            }
+        ]
+    }

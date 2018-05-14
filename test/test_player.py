@@ -3,7 +3,9 @@ import player
 import unittest
 
 class TestPlayer(unittest.TestCase):
-    def test_parse_json(self):
+    def test_ace_pair(self):
         p = player.Player()
-        bet = p.betRequest(example.game_state)
-        self.assertEqual(5, bet)
+        our_cards = [{'rank': 'A', 'suit': 'hearts'},
+                     {'rank': 'A', 'suit': 'spades'}]
+        bet = p.betRequest(example.make_game_state(our_cards))
+        self.assertEqual(480, bet)
