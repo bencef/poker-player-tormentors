@@ -62,7 +62,7 @@ class Player:
             if player["status"] == "active":
                 active_count += 1
         print self.LOG + "number_of_players is " + str(active_count)
-        print json.dumps(game_state, indent=4, sort_keys=True)
+        # print json.dumps(game_state, indent=4, sort_keys=True)
         return active_count
 
     def get_limit_decrease_by_blind(self, small_blind):
@@ -108,8 +108,8 @@ class Player:
 
     def betRequest(self, game_state):
         try:
-            print self.LOG + "game_state:"
-            print self.get_me(game_state)
+            # print self.LOG + "game_state:"
+            # print self.get_me(game_state)
 
             me = self.get_me(game_state)
             my_hand = me["hole_cards"]
