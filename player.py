@@ -2,14 +2,17 @@
 class Player:
     VERSION = "0.0.1"
 
-    def get_me(self, game_state):
-        return self.get_player(game_state, "TorMentors")
-
     def get_player(self, game_state, name):
+        print "02"
         i = 0
         while name != game_state["players"][i]:
             i = i + 1
+        print "03"
         return game_state["players"][i]
+
+    def get_me(self, game_state):
+        print "01"
+        return self.get_player(game_state, "TorMentors")
 
     def betRequest(self, game_state):
         try:
