@@ -1,6 +1,19 @@
 
 class Player:
-    VERSION = "0.0.2"
+    VERSION = "0.0.3"
+    rank = {"A": 14,
+            "K": 13,
+            "Q": 12,
+            "J": 11,
+            "10": 10,
+            "9": 9,
+            "8": 8,
+            "7": 7,
+            "6": 6,
+            "5": 5,
+            "4": 4,
+            "3": 3,
+            "2": 2}
 
     def get_player(self, game_state, name):
         print "TOR get_player starts"
@@ -18,7 +31,10 @@ class Player:
         return hand[0]["rank"] == hand[1]["rank"]
 
     def min_value(self, hand):
-        return min(hand[0]["rank"], hand[1]["rank"])
+        return min(self.rank[hand[0]["rank"]], self.rank[hand[1]["rank"]])
+
+    def number_of_players(self, game_state):
+        return len(game_state["players"])
 
     def betRequest(self, game_state):
         try:
@@ -27,16 +43,22 @@ class Player:
 
             me = self.get_me(game_state)
             my_hole = me["hole_cards"]
-            my_stack = me["stack"]
+            all_in = me["stack"]
+
+            if self.number_of_players(game_state) > 2:
+                value_limit = 12
+            else:
+                value_limit = 10
 
             if self.has_pairs(my_hole):
-                return my_stack
-            if self.min_value(my_hole) > 10:
-                return my_stack
+                return all_in
+            if self.min_value(my_hole) > value_limit:
+                return all_in
             return 0
 
         except:
             print "exception occured"
+
         return 0
         
     def showdown(self, game_state):
