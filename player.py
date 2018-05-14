@@ -3,7 +3,7 @@ class Player:
     VERSION = "0.0.1"
 
     def get_me(self, game_state):
-        return get_player(game_state, "TorMentors")
+        return self.get_player(game_state, "TorMentors")
 
     def get_player(self, game_state, name):
         i = 0
@@ -14,7 +14,7 @@ class Player:
     def betRequest(self, game_state):
         try:
             print "me me me:"
-            print get_me(game_state)
+            print self.get_me(game_state)
 
             myStack = game_state["players"]
             print '0 {0}'.format(myStack)
