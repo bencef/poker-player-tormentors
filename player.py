@@ -52,9 +52,13 @@ class Player:
         return min(self.rank[hand[0]["rank"]], self.rank[hand[1]["rank"]])
 
     def number_of_players(self, game_state):
-        print self.LOG + "number_of_players is " + str(len(game_state["players"]))
+        active_count = 0;
+        for player in game_state["players"]:
+            if player["status"] == "active":
+                active_count += 1;
+        print self.LOG + "number_of_players is " + str(active_count)
         print json.dumps(game_state, indent=4, sort_keys=True)
-        return len(game_state["players"])
+        return active_count
 
     def betRequest(self, game_state):
         try:
@@ -73,9 +77,9 @@ class Player:
             print "my raise: " + str(self.get_raise(game_state))
 
             if self.has_pairs(my_hole):
-                return all_in
+                return self.get_raise(game_state)
             if self.min_value(my_hole) > value_limit:
-                return all_in
+                return self.get_raise(game_state)
             return 0
 
         except:
