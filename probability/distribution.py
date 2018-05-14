@@ -43,6 +43,16 @@ probability.'''
 # write well named functions.
 ################################################################################
 
+def probability(event):
+    '''Get the probability of an event.'''
+
+    return event[1]
+
+def value(event):
+    '''Get the value of an event.'''
+
+    return event[0]
+
 ################################################################################
 # Operations on distributions
 ################################################################################
