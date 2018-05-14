@@ -2,10 +2,10 @@
 class Player:
     VERSION = "0.0.1"
 
-    def get_me(game_state):
+    def get_me(self, game_state):
         return get_player(game_state, "TorMentors")
 
-    def get_player(game_state, name):
+    def get_player(self, game_state, name):
         i = 0
         while name != game_state["players"][i]:
             i = i + 1
