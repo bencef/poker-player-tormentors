@@ -27,7 +27,7 @@ class Player:
         in_action = game_state["in_action"]
         print self.LOG + "in_action " + str(in_action)
 
-        p_bet = game_state[in_action]["bet"]
+        p_bet = game_state[int(in_action)]["bet"]
         min_raise = game_state["minimum_raise"]
         print self.LOG + "minimum_raise " + str(min_raise)
 
