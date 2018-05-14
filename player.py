@@ -1,6 +1,6 @@
 
 class Player:
-    VERSION = "0.0.1"
+    VERSION = "0.0.2"
 
     def get_player(self, game_state, name):
         print "02"
@@ -14,26 +14,32 @@ class Player:
         print "01"
         return self.get_player(game_state, unicode("TorMentors"))
 
+    def has_pairs(self, hand):
+        return hand[0]["rank"] == hand[1]["rank"]
+
+    def min_value(self, hand):
+        return min(hand[0]["rank"], hand[1]["rank"])
+
     def betRequest(self, game_state):
         try:
-            myStack = game_state["players"]
-            print '0 {0}'.format(myStack)
-
             print "me me me:"
             print self.get_me(game_state)
-            
-            myStack = game_state["players"][0]
-            print '1 {0}'.format(myStack)
-            
-            myStack = game_state["players"][0]["name"]
-            print '2 {0}'.format(myStack)
-            
-            myStack = game_state["players"][0]["stack"]
-            print '3 {0}'.format(myStack)
+
+            me = self.get_me(game_state)
+            my_hole = me["hole_cards"]
+            my_stack = me["stack"]
+            print "me me me:"
+            print self.get_me(game_state)
+
+            if self.has_pairs(my_hole):
+                return my_stack
+            if self.min_value(my_hole) > 10:
+                return my_stack
+            return 0
 
         except:
             print "exception occured"
-        return 1000
+        return 0
         
     def showdown(self, game_state):
         pass
