@@ -3,7 +3,7 @@ import json
 
 class Player:
     LOG = "TOR "
-    VERSION = "0.0.6"
+    VERSION = "0.1.0"
     rank = {"A": 14,
             "K": 13,
             "Q": 12,
@@ -53,6 +53,9 @@ class Player:
     def min_value(self, hand):
         return min(self.rank[hand[0]["rank"]], self.rank[hand[1]["rank"]])
 
+    def max_value(self, hand):
+        return max(self.rank[hand[0]["rank"]], self.rank[hand[1]["rank"]])
+
     def number_of_players(self, game_state):
         active_count = 0
         for player in game_state["players"]:
@@ -62,25 +65,63 @@ class Player:
         print json.dumps(game_state, indent=4, sort_keys=True)
         return active_count
 
+    def get_limit_decrease_by_blind(self, small_blind):
+        # 2  3  5  10 15 20 30 (small blind)
+        # 10 20 30 40 50 60 70 (game num)
+        if small_blind <= 5:
+            return 0
+        elif small_blind <= 15:
+            return 1
+        elif small_blind <= 30:
+            return 2
+        else:
+            return 3
+
+    def get_bet(self, hand_min, hand_max, active_enemies, small_blind, min_raise, all_in):
+        decr = self.get_limit_decrease_by_blind(small_blind)
+        if hand_min == hand_max:
+            if active_enemies > 1:
+                if hand_min >= 12 - decr:
+                    return all_in
+                elif hand_min >= 9 - decr:
+                    return min_raise
+                else:
+                    return 0
+            else:
+                if hand_min >= 10 - decr:
+                    return all_in
+                elif hand_min >= 4 - decr:
+                    return min_raise
+                else:
+                    return 0
+        else:
+            if active_enemies > 2:
+                if hand_min >= 13 - decr:
+                    return min_raise
+                else:
+                    return 0
+            else:
+                if hand_min >= 11 - decr:
+                    return min_raise
+                else:
+                    return 0
+
     def betRequest(self, game_state):
         try:
             print self.LOG + "game_state:"
             print self.get_me(game_state)
 
             me = self.get_me(game_state)
-            my_hole = me["hole_cards"]
+            my_hand = me["hole_cards"]
+
+            hand_min = self.min_value(my_hand)
+            hand_max = self.max_value(my_hand)
+            min_raise = self.get_minimum_raise(game_state)
             all_in = me["stack"]
+            small_blind = int(game_state["small_blind"])
+            active_enemies = self.number_of_players(game_state)
 
-            if self.number_of_players(game_state) > 2:
-                value_limit = 11
-            else:
-                value_limit = 10
-
-            if self.has_pairs(my_hole) and self.min_value(my_hole) > 8:
-                return self.get_minimum_raise(game_state)
-            if self.min_value(my_hole) > value_limit:
-                return self.get_minimum_raise(game_state)
-            return 0
+            return self.get_bet(hand_min, hand_max, active_enemies, small_blind, min_raise, all_in)
 
         except:
             print self.LOG + "exception occured"
