@@ -4,6 +4,10 @@
 
 from util import *
 
+################################################################################
+# Constructors
+################################################################################
+
 def certainly(value):
     '''A probability distribution with one outcome which has absolute
 certainity.'''
@@ -31,3 +35,14 @@ probability.'''
         raise ValueError('Probabilities should add up to 1.0')
 
     return zip(values, probabilities)
+
+################################################################################
+# Getters
+#
+# Mostly for internal use.  Avoid these outside of this file.  Rather
+# write well named functions.
+################################################################################
+
+################################################################################
+# Operations on distributions
+################################################################################
