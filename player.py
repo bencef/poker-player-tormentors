@@ -1,6 +1,6 @@
 
 class Player:
-    VERSION = "0.0.1"
+    VERSION = "0.0.2"
 
     def get_player(self, game_state, name):
         print "02"
@@ -19,17 +19,9 @@ class Player:
             print "me me me:"
             print self.get_me(game_state)
 
-            myStack = game_state["players"]
-            print '0 {0}'.format(myStack)
-            
-            myStack = game_state["players"][0]
-            print '1 {0}'.format(myStack)
-            
-            myStack = game_state["players"][0]["name"]
-            print '2 {0}'.format(myStack)
-            
-            myStack = game_state["players"][0]["stack"]
-            print '3 {0}'.format(myStack)
+            me = self.get_me(game_state)
+            my_hole = me["hole_cards"]
+            my_stack = me["stack"]
 
         except:
             print "exception occured"
