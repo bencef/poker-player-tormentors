@@ -1,7 +1,7 @@
 
 class Player:
     LOG = "TOR "
-    VERSION = "0.0.4"
+    VERSION = "0.0.5"
     rank = {"A": 14,
             "K": 13,
             "Q": 12,
@@ -35,7 +35,7 @@ class Player:
         return min(self.rank[hand[0]["rank"]], self.rank[hand[1]["rank"]])
 
     def number_of_players(self, game_state):
-        print self.LOG + "number_of_players is " + len(game_state["players"])
+        print self.LOG + "number_of_players is " + str(len(game_state["players"]))
         print self.LOG + game_state["players"]
         return len(game_state["players"])
 
