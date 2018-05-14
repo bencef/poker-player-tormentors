@@ -16,6 +16,21 @@ class Player:
             "3": 3,
             "2": 2}
 
+    def get_raise(self, game_state):
+        print self.LOG + "get_raise started"
+        # current_buy_in - players[in_action][bet] + minimum_raise
+        cbuy_in = game_state["current_buy_in"]
+        print self.LOG + "current_buy_in " + str(cbuy_in)
+
+        in_action = game_state["in_action"]
+        print self.LOG + "in_action " + str(in_action)
+
+        p_bet = game_state[in_action]["bet"]
+        min_raise = game_state["minimum_raise"]
+        print self.LOG + "minimum_raise " + str(min_raise)
+
+        return cbuy_in - p_bet + min_raise + 1
+
     def get_player(self, game_state, name):
         print self.LOG + "get_player starts"
         i = 0
@@ -36,7 +51,7 @@ class Player:
 
     def number_of_players(self, game_state):
         print self.LOG + "number_of_players is " + str(len(game_state["players"]))
-        print self.LOG + game_state["players"]
+        print json.dumps(game_state, indent=4, sort_keys=True)
         return len(game_state["players"])
 
     def betRequest(self, game_state):
@@ -52,6 +67,8 @@ class Player:
                 value_limit = 12
             else:
                 value_limit = 10
+
+            print "my raise: " + str(self.get_raise(game_state))
 
             if self.has_pairs(my_hole):
                 return all_in
