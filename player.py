@@ -3,7 +3,7 @@ import json
 
 class Player:
     LOG = "TOR "
-    VERSION = "0.0.5"
+    VERSION = "0.0.6"
     rank = {"A": 14,
             "K": 13,
             "Q": 12,
@@ -72,7 +72,7 @@ class Player:
             all_in = me["stack"]
 
             if self.number_of_players(game_state) > 2:
-                value_limit = 12
+                value_limit = 11
             else:
                 value_limit = 10
 
