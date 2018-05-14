@@ -5,7 +5,7 @@ class Player:
     def get_player(self, game_state, name):
         print "02"
         i = 0
-        while name != game_state["players"][i]:
+        while name != game_state["players"][i]["name"]:
             i = i + 1
         print "03"
         return game_state["players"][i]
@@ -16,11 +16,11 @@ class Player:
 
     def betRequest(self, game_state):
         try:
-            print "me me me:"
-            print self.get_me(game_state)
-
             myStack = game_state["players"]
             print '0 {0}'.format(myStack)
+
+            print "me me me:"
+            print self.get_me(game_state)
             
             myStack = game_state["players"][0]
             print '1 {0}'.format(myStack)
