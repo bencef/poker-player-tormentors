@@ -51,7 +51,7 @@ game_state = json.loads('''{
       },
       {
           "id": 1,
-          "name": "Bob",
+          "name": "TorMentors",
           "status": "active",
           "version": "Default random player",
           "stack": 1590,
