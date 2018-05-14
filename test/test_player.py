@@ -4,11 +4,18 @@ import unittest
 
 class TestPlayer(unittest.TestCase):
 
-    def test_ace_pair(self):
-        p = player.Player()
-        our_cards = pair_of('A')
-        bet = p.betRequest(example.make_game_state(our_cards))
+    def setUp(self):
+        self.player = player.Player()
+
+    def test_nine_pair(self):
+        our_cards = pair_of('9')
+        bet = self.player.betRequest(example.make_game_state(our_cards))
         self.assertTrue(0 < bet)
+
+    def test_eight_pair(self):
+        our_cards = pair_of('8')
+        bet = self.player.betRequest(example.make_game_state(our_cards))
+        self.assertEqual(0, bet)
 
 ################################################################################
 # Helpers
