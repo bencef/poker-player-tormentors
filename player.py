@@ -54,10 +54,10 @@ class Player:
         return min(self.rank[hand[0]["rank"]], self.rank[hand[1]["rank"]])
 
     def number_of_players(self, game_state):
-        active_count = 0;
+        active_count = 0
         for player in game_state["players"]:
             if player["status"] == "active":
-                active_count += 1;
+                active_count += 1
         print self.LOG + "number_of_players is " + str(active_count)
         print json.dumps(game_state, indent=4, sort_keys=True)
         return active_count
@@ -76,7 +76,7 @@ class Player:
             else:
                 value_limit = 10
 
-            if self.has_pairs(my_hole):
+            if self.has_pairs(my_hole) and self.min_value(my_hole) > 8:
                 return self.get_minimum_raise(game_state)
             if self.min_value(my_hole) > value_limit:
                 return self.get_minimum_raise(game_state)
