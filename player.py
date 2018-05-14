@@ -1,7 +1,7 @@
 
 class Player:
     LOG = "TOR "
-    VERSION = "0.0.3"
+    VERSION = "0.0.4"
     rank = {"A": 14,
             "K": 13,
             "Q": 12,
@@ -17,15 +17,15 @@ class Player:
             "2": 2}
 
     def get_player(self, game_state, name):
-        print LOG + "get_player starts"
+        print self.LOG + "get_player starts"
         i = 0
         while name != game_state["players"][i]["name"]:
             i = i + 1
-        print LOG + "get_player returns"
+        print self.LOG + "get_player returns"
         return game_state["players"][i]
 
     def get_me(self, game_state):
-        print LOG + "get_me starts and calls get_player"
+        print self.LOG + "get_me starts and calls get_player"
         return self.get_player(game_state, unicode("TorMentors"))
 
     def has_pairs(self, hand):
@@ -39,7 +39,7 @@ class Player:
 
     def betRequest(self, game_state):
         try:
-            print LOG + "game_state:"
+            print self.LOG + "game_state:"
             print self.get_me(game_state)
 
             me = self.get_me(game_state)
@@ -58,7 +58,7 @@ class Player:
             return 0
 
         except:
-            print LOG + "exception occured"
+            print self.LOG + "exception occured"
 
         return 0
         
