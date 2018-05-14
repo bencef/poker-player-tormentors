@@ -18,7 +18,12 @@ class Player:
             "3": 3,
             "2": 2}
 
-    def get_raise(self, game_state):
+    def get_minimum_raise(self, game_state):
+        min_raise = game_state["minimum_raise"]
+        print self.LOG + "minimum_raise " + str(min_raise)
+        return self.get_call(game_state) + min_raise
+
+    def get_call(self, game_state):
         print self.LOG + "get_raise started"
         # current_buy_in - players[in_action][bet] + minimum_raise
         cbuy_in = game_state["current_buy_in"]
@@ -28,10 +33,7 @@ class Player:
         print self.LOG + "in_action " + str(in_action)
 
         p_bet = game_state["players"][int(in_action)]["bet"]
-        min_raise = game_state["minimum_raise"]
-        print self.LOG + "minimum_raise " + str(min_raise)
-
-        return cbuy_in - p_bet + min_raise + 1
+        return cbuy_in - p_bet
 
     def get_player(self, game_state, name):
         print self.LOG + "get_player starts"
@@ -74,12 +76,10 @@ class Player:
             else:
                 value_limit = 10
 
-            print "my raise: " + str(self.get_raise(game_state))
-
             if self.has_pairs(my_hole):
-                return self.get_raise(game_state)
+                return self.get_minimum_raise(game_state)
             if self.min_value(my_hole) > value_limit:
-                return self.get_raise(game_state)
+                return self.get_minimum_raise(game_state)
             return 0
 
         except:
