@@ -35,6 +35,8 @@ class Player:
         return min(self.rank[hand[0]["rank"]], self.rank[hand[1]["rank"]])
 
     def number_of_players(self, game_state):
+        print self.LOG + "number_of_players is " + len(game_state["players"])
+        print self.LOG + game_state["players"]
         return len(game_state["players"])
 
     def betRequest(self, game_state):
