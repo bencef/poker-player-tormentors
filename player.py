@@ -12,7 +12,7 @@ class Player:
 
     def get_me(self, game_state):
         print "01"
-        return self.get_player(game_state, "TorMentors")
+        return self.get_player(game_state, unicode("TorMentors"))
 
     def betRequest(self, game_state):
         try:
