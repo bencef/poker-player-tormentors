@@ -9,12 +9,14 @@ class TestPlayer(unittest.TestCase):
 
     def test_nine_pair(self):
         our_cards = pair_of('9')
-        bet = self.player.betRequest(example.make_game_state(our_cards))
+        game_state = example.make_game_state(our_cards, 2, 10)
+        bet = self.player.betRequest(game_state)
         self.assertTrue(0 < bet)
 
     def test_eight_pair(self):
         our_cards = pair_of('8')
-        bet = self.player.betRequest(example.make_game_state(our_cards))
+        game_state = example.make_game_state(our_cards, 3, 15)
+        bet = self.player.betRequest(game_state)
         self.assertEqual(0, bet)
 
 ################################################################################
